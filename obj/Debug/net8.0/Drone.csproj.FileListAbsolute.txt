@@ -12,3 +12,18 @@ c:\Users\ysaac\OneDrive\Área de Trabalho\C#\Drone\obj\Debug\net8.0\refint\Drone
 c:\Users\ysaac\OneDrive\Área de Trabalho\C#\Drone\obj\Debug\net8.0\Drone.pdb
 c:\Users\ysaac\OneDrive\Área de Trabalho\C#\Drone\obj\Debug\net8.0\Drone.genruntimeconfig.cache
 c:\Users\ysaac\OneDrive\Área de Trabalho\C#\Drone\obj\Debug\net8.0\ref\Drone.dll
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\bin\Debug\net8.0\Drone.exe
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\bin\Debug\net8.0\Drone.deps.json
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\bin\Debug\net8.0\Drone.runtimeconfig.json
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\bin\Debug\net8.0\Drone.dll
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\bin\Debug\net8.0\Drone.pdb
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.AssemblyInfoInputs.cache
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.AssemblyInfo.cs
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.csproj.CoreCompileInputs.cache
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.sourcelink.json
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.dll
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\refint\Drone.dll
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.pdb
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\Drone.genruntimeconfig.cache
+c:\Users\C-JOVEM-P359\Desktop\C#\DroneExploracao\obj\Debug\net8.0\ref\Drone.dll

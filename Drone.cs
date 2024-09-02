@@ -6,11 +6,20 @@ namespace Drone {
     public class Drone {
 
         public double Height {get; set;}
+        public int Angle {get; set;}
+        public double Speed {get; set;}
 
-        public void Fly (double altura) {
-            this.Height += altura;
+        public void Fly (double height) {
+            this.Height += height;
         }
-       
+        
+        public void Direction (int direction) {
+            this.Angle += direction;
+        }
+        
+        public void MoveVelocity (double speed) {
+            this.Speed += speed;
+        }
     }
 
 }
