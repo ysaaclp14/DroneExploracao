@@ -9,6 +9,8 @@ namespace Drone {
         public int Angle {get; set;}
         public double Speed {get; set;}
         public bool Approximation {get; set;}
+        public string Status {get; set;} = "atividade";
+
         public void Fly (double height) {
             this.Height += height;
         }
@@ -25,6 +27,10 @@ namespace Drone {
             approximation = true;
             this.Approximation = approximation;
         }   
+
+        public void Arm (string status) {
+            this.Status = status;
+        }
     }
 
 }

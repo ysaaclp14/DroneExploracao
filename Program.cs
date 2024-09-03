@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Dynamic;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Drone {
@@ -75,6 +77,12 @@ namespace Drone {
             
             Console.WriteLine("Digite qual altura você deseja: ");
             drone.Height = double.Parse(Console.ReadLine());
+
+            if (drone.Height > 25) {
+                Console.WriteLine("Esse é um valor muito alto. Digite novamente");
+                WriteHeight(drone);
+            }
+            
         }
 
         static void Direction (Drone drone) {
@@ -109,8 +117,13 @@ namespace Drone {
         }
         
         static void WriteDirection (Drone drone) {
-            Console.WriteLine("Digite qual direção você deseja: ");
+            Console.WriteLine("Digite quantos graus você deseja virar: ");
             drone.Angle = int.Parse(Console.ReadLine());
+
+            if (drone.Angle > 360) {
+                Console.WriteLine("Esse é um valor muito alto. Digite novamente");
+                WriteDirection(drone);
+            }
         }
 
         static void MoveVelocity (Drone drone) {
@@ -149,29 +162,34 @@ namespace Drone {
     
         static void ApproxObj (Drone drone) {
 
-            if (drone.Speed == 0) {
+            if (drone.Speed == 0 && drone.Height == 0) {
                 drone.Approximation = true;
             }       
-            else if (drone.Speed > 0) {
-                drone.Approximation = false;
-                Console.WriteLine("O drone precisa estar parado para se aproximar de um objeto");
+            else if (drone.Speed > 0 && drone.Height > 0) {
+                drone.Approximation = false; 
+                Console.WriteLine("O drone precisa estar parado e no chão para se aproximar de um objeto");
                 Thread.Sleep(2000);
+                Menu(drone);
             }
 
             while (drone.Approximation) {
                 short action = 0;
                 Console.WriteLine("O drone encontrou um objeto, O que deseja fazer? ");
                 Console.WriteLine("1 - Interagir");
-                Console.WriteLine("0 - Sair");
+                Console.WriteLine("0 - Se Afastar");
                 action = short.Parse(Console.ReadLine());
 
                 switch (action) {
-                    case 1: Console.Write("teste"); break;
+                    case 1: LeftArm(drone); break;
                     case 0: MoveVelocity(drone); break;
                     default: Console.WriteLine("Invalido"); break;
                 }
             }
-            Menu(drone);
+        }
+
+        static void LeftArm (Drone drone) {
+
+                     
         }
     }
 
