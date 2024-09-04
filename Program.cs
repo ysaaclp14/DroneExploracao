@@ -17,14 +17,28 @@ namespace Drone {
         }   
 
         static void Menu (Drone drone) {
+            
+            int op;
 
-            Console.WriteLine("O que você deseja fazer com o drone? ");
-            Console.WriteLine("1 - Voar");
-            Console.WriteLine("2 - Direção do Drone");
-            Console.WriteLine("3 - Velocidade");
-            Console.WriteLine("4 - Aproximar de um Objeto");
-            Console.WriteLine("0 - Sair");
-            int op = int.Parse(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("O que você deseja fazer com o drone? ");
+                Console.WriteLine("1 - Voar");
+                Console.WriteLine("2 - Direção do Drone");
+                Console.WriteLine("3 - Velocidade");
+                Console.WriteLine("4 - Aproximar de um Objeto");
+                Console.WriteLine("0 - Sair");
+                op = int.Parse(Console.ReadLine());
+            }
+            catch (Exception erro)
+            {  
+                Console.WriteLine($"Houve um erro de digitação {erro}"); 
+                Console.WriteLine("Voltando para o menu");
+                Thread.Sleep(1000); 
+                Menu(drone);
+                throw;
+            }
+
             switch (op) {
                 case 1: Fly(drone); break;
                 case 2: Direction(drone); break;
@@ -39,14 +53,23 @@ namespace Drone {
         static void Fly (Drone drone) {
           
             while (drone.Height <= 24.5 && drone.Height >= 0) {
-                short direction = 0;
-                Console.WriteLine("Esse é o menu de voou, o que deseja fazer? ");
-                Console.WriteLine("1 - Subir");
-                Console.WriteLine("2 - Descer");
-                Console.WriteLine("3 - Escrever Valor");
-                Console.WriteLine("0 - Voltar");
-                direction = short.Parse(Console.ReadLine());
-            
+                short direction;
+
+                try {
+                    Console.WriteLine("Esse é o menu de voou, o que deseja fazer? ");
+                    Console.WriteLine("1 - Subir");
+                    Console.WriteLine("2 - Descer");
+                    Console.WriteLine("3 - Escrever Valor");
+                    Console.WriteLine("0 - Voltar");
+                    direction = short.Parse(Console.ReadLine());
+                }
+                catch (Exception erro) {
+                    Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                    Console.WriteLine("Voltando para o menu");
+                    Thread.Sleep(1000); 
+                    Menu(drone);
+                    throw;
+                }
                 switch (direction) {
                     case 1: drone.Fly(0.5); break;
                     case 2: drone.Fly(-0.5); break;
@@ -88,13 +111,22 @@ namespace Drone {
         static void Direction (Drone drone) {
 
             while (drone.Angle <= 360 && drone.Angle >= 0) {
-                short direction = 0;
-                Console.WriteLine("Esse é o menu de direçao, o que deseja fazer? ");
-                Console.WriteLine("1 - Direita");
-                Console.WriteLine("2 - Esquerda");
-                Console.WriteLine("3 - Escrever Valor");
-                Console.WriteLine("0 - Voltar");
-                direction = short.Parse(Console.ReadLine());
+                short direction;
+                try {
+                    Console.WriteLine("Esse é o menu de direçao, o que deseja fazer? ");
+                    Console.WriteLine("1 - Direita");
+                    Console.WriteLine("2 - Esquerda");
+                    Console.WriteLine("3 - Escrever Valor");
+                    Console.WriteLine("0 - Voltar");
+                    direction = short.Parse(Console.ReadLine());
+                }
+                catch (Exception erro) {
+                    Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                    Console.WriteLine("Voltando para o menu");
+                    Thread.Sleep(1000); 
+                    Menu(drone);
+                    throw;
+                }
             
                 switch (direction) {
                     case 1: drone.Direction(5); break;
@@ -129,12 +161,21 @@ namespace Drone {
         static void MoveVelocity (Drone drone) {
 
             while (drone.Speed < 15 && drone.Speed >= 0) {
-                short velocity = 0;
-                Console.WriteLine("Esse é o menu de velocidade, o que deseja fazer? ");
-                Console.WriteLine("1 - Aumentar");
-                Console.WriteLine("2 - Diminuir");
-                Console.WriteLine("0 - Voltar");
-                velocity = short.Parse(Console.ReadLine());
+                short velocity;
+                try {
+                    Console.WriteLine("Esse é o menu de velocidade, o que deseja fazer? ");
+                    Console.WriteLine("1 - Aumentar");
+                    Console.WriteLine("2 - Diminuir");
+                    Console.WriteLine("0 - Voltar");
+                    velocity = short.Parse(Console.ReadLine());
+                }
+                catch (Exception erro) {
+                    Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                    Console.WriteLine("Voltando para o menu");
+                    Thread.Sleep(1000); 
+                    Menu(drone);
+                    throw;
+                }
             
                 switch (velocity) {
                     case 1: drone.MoveVelocity(0.5); break;
@@ -164,31 +205,45 @@ namespace Drone {
 
             if (drone.Speed == 0 && drone.Height == 0) {
                 drone.Approximation = true;
+                drone.Status = "atividade";
             }       
-            else if (drone.Speed > 0 && drone.Height > 0) {
+            else if (drone.Speed > 0 || drone.Height > 0) {
                 drone.Approximation = false; 
+                drone.Status = "repouso";
                 Console.WriteLine("O drone precisa estar parado e no chão para se aproximar de um objeto");
                 Thread.Sleep(2000);
                 Menu(drone);
             }
-
+            
             while (drone.Approximation) {
-                short action = 0;
-                Console.WriteLine("O drone encontrou um objeto, O que deseja fazer? ");
-                Console.WriteLine("1 - Interagir");
-                Console.WriteLine("0 - Se Afastar");
-                action = short.Parse(Console.ReadLine());
+                short action;
+                try {
+                    Console.WriteLine("O drone encontrou um objeto, O que deseja fazer? ");
+                    Console.WriteLine("1 - Interagir");
+                    Console.WriteLine("0 - Se Afastar");
+                    action = short.Parse(Console.ReadLine());
+                }
+                catch (Exception erro) {
+                    Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                    Console.WriteLine("Voltando para o menu");
+                    Thread.Sleep(1000); 
+                    Menu(drone);
+                    throw;
+                }
 
                 switch (action) {
-                    case 1: LeftArm(drone); break;
+                    case 1: Arm(drone); break;
                     case 0: MoveVelocity(drone); break;
                     default: Console.WriteLine("Invalido"); break;
                 }
             }
         }
 
-        static void LeftArm (Drone drone) {
+        static void Arm (Drone drone) {
+        
+            if (drone.Status == "atividade") {
 
+            }
                      
         }
     }
