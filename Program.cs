@@ -234,17 +234,39 @@ namespace Drone {
                 switch (action) {
                     case 1: Arm(drone); break;
                     case 0: MoveVelocity(drone); break;
-                    default: Console.WriteLine("Invalido"); break;
+                    default: Console.WriteLine("Valor Invalido"); break;
                 }
             }
         }
 
         static void Arm (Drone drone) {
-        
-            if (drone.Status == "atividade") {
+            short action;
 
+            try {
+                Console.WriteLine("O que fazer com o objeto");
+                Console.WriteLine("1 - Pegar");
+                Console.WriteLine("2 - Armazenar");
+                Console.WriteLine("3 - Coletar");
+                Console.WriteLine("4 - Bater");
+                Console.WriteLine("5 - Cortar");
+                action = short.Parse(Console.ReadLine());
             }
-                     
+            catch (Exception erro) {
+                Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                Console.WriteLine("Voltando para o menu");
+                Thread.Sleep(1000); 
+                Menu(drone);
+                throw;
+            }
+            
+            switch(action) {
+                case 1: ; break; 
+                case 2: ; break;
+                case 3: ; break;
+                case 4: ; break;
+                case 5: ; break;
+                default: Console.WriteLine("Valor Inválido"); break;
+            }
         }
     }
 

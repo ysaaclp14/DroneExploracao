@@ -10,6 +10,7 @@ namespace Drone {
         public double Speed {get; set;}
         public bool Approximation {get; set;}
         public string Status {get; set;} = "atividade";
+        public bool Articulation {get; set;}
 
         public void Fly (double height) {
             this.Height += height;
@@ -30,6 +31,14 @@ namespace Drone {
 
         public void Arm (string status) {
             this.Status = status;
+        }
+
+        public void Elbow (bool articulation) {
+            articulation = true;
+            this.Articulation = articulation;
+        }
+        public void Take () {
+
         }
     }
 
