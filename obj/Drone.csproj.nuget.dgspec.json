@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj": {}
+    "c:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj": {}
   },
   "projects": {
-    "C:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj": {
+    "c:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj",
+        "projectUniqueName": "c:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj",
         "projectName": "Drone",
-        "projectPath": "C:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj",
+        "projectPath": "c:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\Drone.csproj",
         "packagesPath": "C:\\Users\\C-JOVEM-P359\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\obj\\",
+        "outputPath": "c:\\Users\\C-JOVEM-P359\\Desktop\\C#\\DroneExploracao\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

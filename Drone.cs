@@ -11,6 +11,8 @@ namespace Drone {
         public bool Approximation {get; set;}
         public string Status {get; set;} = "atividade";
         public bool Articulation {get; set;}
+        public int Take {get; set;}
+        public int Rotate {get; set;}
 
         public void Fly (double height) {
             this.Height += height;
@@ -37,8 +39,13 @@ namespace Drone {
             articulation = true;
             this.Articulation = articulation;
         }
-        public void Take () {
+        
+        public void Hold (int obj) {
+            this.Take += obj;
+        }
 
+        public void Rotating (int direction) {
+            this.Rotate += direction;
         }
     }
 
