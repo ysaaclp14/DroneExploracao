@@ -19,6 +19,10 @@ namespace Drone {
         static void Menu (Drone drone) {
             Console.Clear();
 
+            if (drone.Height == 0 && drone.Speed == 0 && drone.Status != "Ocupado") {
+                drone.Status = "Em atividade";
+            }
+
             int op;
 
             try
@@ -29,6 +33,7 @@ namespace Drone {
                 Console.WriteLine("                                   2 - Direção do Drone................                                  ");
                 Console.WriteLine("                                   3 - Velocidade......................                                  ");
                 Console.WriteLine("                                   4 - Aproximar de um Objeto..........                                  ");
+                Console.WriteLine("                                   5 - Status..........................                                  ");
                 Console.WriteLine("                                   0 - Sair............................                                  ");
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                 op = int.Parse(Console.ReadLine());
@@ -47,10 +52,43 @@ namespace Drone {
                 case 2: Direction(drone); break;
                 case 3: MoveVelocity(drone); break;
                 case 4: ApproxObj(drone); break;
+                case 5: DroneStatus(drone); break;
                 case 0: System.Environment.Exit(0); break;
                 default: Console.WriteLine("Valor Inválido"); break;
             }
             
+            
+        }
+
+        static void DroneStatus(Drone drone) {
+            Console.Clear();
+            short op;
+
+            try {
+                Console.WriteLine("Estatísticas do Drone.");
+                Console.WriteLine($"Altura: {drone.Height}m");
+                Console.WriteLine($"Direção: {drone.Angle}°");
+                Console.WriteLine($"Velocidade: {drone.Speed}m/s");
+                Console.WriteLine($"Braços: {drone.Status}");
+                Console.WriteLine($"Rotação dos Braços: {drone.Rotate}");
+                Console.WriteLine($"Objetos: {drone.Take}");
+                Console.WriteLine("0 - Voltar");
+                op = short.Parse(Console.ReadLine());
+            }
+            catch (Exception erro) {
+                Console.WriteLine($"Houve um erro de digitação {erro.Message}"); 
+                Console.WriteLine("Voltando para o menu.............");
+                Console.ReadLine(); 
+                Menu(drone);
+                throw;
+            }
+
+            switch (op)
+            {
+                case 0: Menu(drone); break;
+                default: Console.WriteLine("Valor Inválido"); break;
+            }
+
         }
 
         static void Fly (Drone drone) {
@@ -85,6 +123,9 @@ namespace Drone {
                     case 0: Menu(drone); break;
                     default: Console.WriteLine("Valor Inválido"); break;
                 }
+                if (drone.Height > 0) {
+                    drone.Status = "Em repouso";     
+                }
                 if (drone.Height <= 0) {
                     drone.Height = 0;
                     break; 
@@ -111,15 +152,15 @@ namespace Drone {
                     default: Console.WriteLine("Valor Inválido"); break;
                 }
             }
-            else {
+            else if (drone.Height == 0){
                 Console.Clear();
-                Console.WriteLine("------------------------------------------------------------------------------------------");
-                Console.WriteLine("                                   O drone está no chão                                   ");
-                Console.WriteLine("                                   O que fazer.........                                   ");
-                Console.WriteLine("                                   1 - Subir...........                                   ");
-                Console.WriteLine("                                   2 - Escrever Valor..                                   ");
-                Console.WriteLine("                                   0 - Voltar..........                                   ");
-                Console.WriteLine("------------------------------------------------------------------------------------------");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                Console.WriteLine("                                        O drone está no chão                                        ");
+                Console.WriteLine("                                        O que fazer.........                                        ");
+                Console.WriteLine("                                        1 - Subir...........                                        ");
+                Console.WriteLine("                                        2 - Escrever Valor..                                        ");
+                Console.WriteLine("                                        0 - Voltar..........                                        ");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 short direction = short.Parse(Console.ReadLine());
 
                 switch (direction)
@@ -130,21 +171,21 @@ namespace Drone {
                     default: Console.WriteLine("Valor Inválido"); break;
                 }
             }
-            Menu(drone);
+            Fly(drone);
         }
 
         static void WriteHeight (Drone drone) {
             Console.Clear();
             
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine("                                   Digite qual altura você deseja:                                   ");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("                                    Digite qual altura você deseja:                                    ");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------");
             drone.Height = double.Parse(Console.ReadLine());
 
             if (drone.Height > 25) {
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                Console.WriteLine("                                   A altura maxima é de 25 metros                                   ");
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                Console.WriteLine("---------------------------------------------------------------------------------------------------");
+                Console.WriteLine("                                  A altura maxima é de 25 metros                                   ");
+                Console.WriteLine("---------------------------------------------------------------------------------------------------");
                 drone.Height = 25;
             }
             
@@ -157,12 +198,14 @@ namespace Drone {
                 Console.Clear();
                 short direction;
                 try {
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("                                   Esse é o menu de direçao, o que deseja fazer?                                   ");
-                    Console.WriteLine($"                                  O drone virou {drone.Angle}°");
+                    Console.WriteLine($"                                   O drone virou {drone.Angle}°");
                     Console.WriteLine("                                   1 - Direita..................................                                   ");
                     Console.WriteLine("                                   2 - Esquerda.................................                                   ");
                     Console.WriteLine("                                   3 - Escrever Valor...........................                                   ");
                     Console.WriteLine("                                   0 - Voltar...................................                                   ");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
                     direction = short.Parse(Console.ReadLine());
                 }
                 catch (Exception erro) {
@@ -210,15 +253,17 @@ namespace Drone {
         static void MoveVelocity (Drone drone) {
             Console.Clear();
 
-            while (drone.Speed < 15 && drone.Speed >= 0) {
+            while (drone.Speed <= 15 && drone.Speed >= 0) {
                 Console.Clear();
                 short velocity;
                 try {
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("                                   Esse é o menu de velocidade, o que deseja fazer?                                   ");
-                    Console.WriteLine($"                                  Sua velocidade atual é de {drone.Speed}m/s");
+                    Console.WriteLine($"                                   Sua velocidade atual é de {drone.Speed}m/s");
                     Console.WriteLine("                                   1 - Aumentar....................................                                   ");
                     Console.WriteLine("                                   2 - Diminuir....................................                                   ");
                     Console.WriteLine("                                   0 - Voltar......................................                                   ");
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
                     velocity = short.Parse(Console.ReadLine());
                 }
                 catch (Exception erro) {
@@ -235,11 +280,8 @@ namespace Drone {
                     case 0: Menu(drone); break;
                     default: Console.WriteLine("Valor Inválido"); break;
                 }
-                
-                if (drone.Speed == 15) {
-                    Console.WriteLine("                                   O drone chegou na velocidade máxima.                                   ");
-                    Thread.Sleep(1000);
-                    break;
+                if (drone.Speed > 0) {
+                    drone.Status = "Em repouso";     
                 }
                 else if (drone.Speed <= 0) {
                     drone.Speed = 0;
@@ -247,23 +289,55 @@ namespace Drone {
                     Thread.Sleep(1000);
                     break;
                 }
+                
+                if (drone.Speed > 15) {
+                    drone.Speed = 15;
+                }
+                
+                if (drone.Speed >= 15) {
+                    try {
+                        Console.Clear();
+                        Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                        Console.WriteLine("                                   O drone chegou na velocidade máxima.                              ");
+                        Console.WriteLine($"                                   Sua velocidade atual é de {drone.Speed}m/s");
+                        Console.WriteLine("                                   O que fazer.........................                              ");
+                        Console.WriteLine("                                   1 - Diminuir........................                              ");
+                        Console.WriteLine("                                   2 - Voltar..........................                              ");
+                        Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                        velocity = short.Parse(Console.ReadLine());
+                    }
+                    catch (Exception erro) {
+                        Console.WriteLine($"Houve um erro de digitação{erro.Message}"); 
+                        Console.WriteLine("Voltando para o menu");
+                        Console.ReadLine();
+                        Menu(drone);
+                        throw;
+                    }
+
+                    switch (velocity)
+                    {
+                        case 1: drone.MoveVelocity(-0.5); break;
+                        case 2: Menu(drone); break;
+                        default: Console.WriteLine("Valor Inválido"); break;
+                    }
+                    
+                }
+                
 
             }
-            Menu(drone);
+            MoveVelocity(drone);
         }
     
         static void ApproxObj (Drone drone) {
             Console.Clear();
 
-            if (drone.Speed == 0 && drone.Height == 0) {
+            if (drone.Status == "Em atividade") {
                 drone.Approximation = true;
-                drone.Status = "atividade";
             }       
-            else if (drone.Speed > 0 || drone.Height > 0) {
-                drone.Approximation = false; 
-                drone.Status = "repouso";
-                Console.WriteLine("                                   O drone precisa estar parado e no chão para se aproximar de um objeto                                   ");
-                Thread.Sleep(2000);
+            else if (drone.Status == "Em repouso") {
+                drone.Approximation = false;
+                Console.WriteLine("                              O drone precisa estar parado e no chão para se aproximar de um objeto                              ");
+                Console.ReadLine();
                 Menu(drone);
             }
             
@@ -288,7 +362,7 @@ namespace Drone {
 
                 switch (action) {
                     case 1: Arm(drone); break;
-                    case 0: MoveVelocity(drone); break;
+                    case 0: Menu(drone); break;
                     default: Console.WriteLine("Valor Invalido"); break;
                 }
             }
@@ -301,9 +375,8 @@ namespace Drone {
             try {
                 Console.WriteLine("O que fazer com o objeto");
                 Console.WriteLine("1 - Pegar");
-                Console.WriteLine("2 - Coletar");
-                Console.WriteLine("3 - Bater");
-                Console.WriteLine("4 - Cortar");
+                Console.WriteLine("2 - Bater");
+                Console.WriteLine("3 - Cortar");
                 action = short.Parse(Console.ReadLine());
             }
             catch (Exception erro) {
@@ -316,21 +389,44 @@ namespace Drone {
             
             switch(action) {
                 case 1: Take(drone); break; 
-                case 2: ; break;
+                case 2: Knock(drone); break;
                 case 3: ; break;
-                case 4: ; break;
                 default: Console.WriteLine("Valor Inválido"); break;
             }
         }
 
         static void Take (Drone drone) {
             Console.Clear();
+
+            if (drone.Status == "Ocupado") {
+                short v;
+                try {
+                    Console.WriteLine("O drone já está segurando um objeto, é preciso armazena-lo");
+                    Console.WriteLine("1 - Armazenar");
+                    Console.WriteLine("0 - Cancelar");
+                    v = short.Parse(Console.ReadLine());
+                }
+                catch (Exception erro) {
+                    Console.WriteLine($"Houve um erro de digitação{erro}"); 
+                    Console.WriteLine("Voltando para o menu");
+                    Console.ReadLine();
+                    Menu(drone);
+                    throw;
+                }
+                switch (v) {
+                    case 1: Console.WriteLine("Objeto armazenado com sucesso"); drone.Take++; break;
+                    case 0: ApproxObj(drone); break; 
+                    default: Console.WriteLine("Valor Inválido"); break;
+                }
+            }
+            
             short value;
             try {
                 Console.WriteLine("O drone pegou um objeto.");
                 Console.WriteLine("O que fazer?");
                 Console.WriteLine("1 - Armazenar");
                 Console.WriteLine("2 - Rotacionar Pulso");
+                Console.WriteLine("3 - Manter");
                 value = short.Parse(Console.ReadLine());
             }
             catch (Exception erro) {
@@ -342,10 +438,13 @@ namespace Drone {
             }
 
             switch(value) {
-                case 1: Console.WriteLine("Objeto armazenado com sucesso"); drone.Take++; Menu(drone); break;
+                case 1: Console.WriteLine("Objeto armazenado com sucesso"); drone.Take++; break;
                 case 2: Rotate(drone); break;
+                case 3: drone.Status = "Ocupado"; break;
                 default: Console.WriteLine("Valor Inválido"); break;
             }
+            Thread.Sleep(1000);
+            Menu(drone);
 
         }
 
@@ -403,6 +502,9 @@ namespace Drone {
                 drone.Rotate = int.Parse(Console.ReadLine());
             }
         }
+    
+        static void Knock (Drone drone) {
+            
+        }
     }
-
 }

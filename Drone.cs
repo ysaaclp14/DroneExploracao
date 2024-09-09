@@ -9,7 +9,7 @@ namespace Drone {
         public int Angle {get; set;}
         public double Speed {get; set;}
         public bool Approximation {get; set;}
-        public string Status {get; set;} = "atividade";
+        public string Status {get; set;} = "Em atividade";
         public bool Articulation {get; set;}
         public int Take {get; set;}
         public int Rotate {get; set;}
