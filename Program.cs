@@ -345,11 +345,11 @@ namespace Drone {
                 Console.Clear();
                 short action;
                 try {
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("                                   O drone encontrou um objeto, O que deseja fazer?                                   ");
-                    Console.WriteLine("                                   1 - Interagir...................................                                   ");
-                    Console.WriteLine("                                   0 - Se Afastar..................................                                   ");
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("                               O drone encontrou um objeto, O que deseja fazer?                                   ");
+                    Console.WriteLine("                               1 - Interagir...................................                                   ");
+                    Console.WriteLine("                               0 - Se Afastar..................................                                   ");
+                    Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
                     action = short.Parse(Console.ReadLine());
                 }
                 catch (Exception erro) {
@@ -373,10 +373,12 @@ namespace Drone {
             short action;
 
             try {
-                Console.WriteLine("O que fazer com o objeto");
-                Console.WriteLine("1 - Pegar");
-                Console.WriteLine("2 - Bater");
-                Console.WriteLine("3 - Cortar");
+                Console.WriteLine("--------------------------------------------------------------------------------------");
+                Console.WriteLine("                               O que fazer com o objeto                               ");
+                Console.WriteLine("                               1 - Pegar...............                               ");
+                Console.WriteLine("                               2 - Bater...............                               ");
+                Console.WriteLine("                               3 - Cortar..............                               ");
+                Console.WriteLine("--------------------------------------------------------------------------------------");
                 action = short.Parse(Console.ReadLine());
             }
             catch (Exception erro) {
@@ -390,7 +392,7 @@ namespace Drone {
             switch(action) {
                 case 1: Take(drone); break; 
                 case 2: Knock(drone); break;
-                case 3: ; break;
+                case 3: Cut(drone); break;
                 default: Console.WriteLine("Valor Inválido"); break;
             }
         }
@@ -401,9 +403,11 @@ namespace Drone {
             if (drone.Status == "Ocupado") {
                 short v;
                 try {
-                    Console.WriteLine("O drone já está segurando um objeto, é preciso armazena-lo");
-                    Console.WriteLine("1 - Armazenar");
-                    Console.WriteLine("0 - Cancelar");
+                    Console.WriteLine("------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("                         O drone já está segurando um objeto, é preciso armazena-lo                         ");
+                    Console.WriteLine("                         1 - Armazenar.............................................                         ");
+                    Console.WriteLine("                         0 - Cancelar..............................................                         ");
+                    Console.WriteLine("------------------------------------------------------------------------------------------------------------");
                     v = short.Parse(Console.ReadLine());
                 }
                 catch (Exception erro) {
@@ -422,11 +426,14 @@ namespace Drone {
             
             short value;
             try {
-                Console.WriteLine("O drone pegou um objeto.");
-                Console.WriteLine("O que fazer?");
-                Console.WriteLine("1 - Armazenar");
-                Console.WriteLine("2 - Rotacionar Pulso");
-                Console.WriteLine("3 - Manter");
+                Console.WriteLine("--------------------------------------------------------------------------------");
+                Console.WriteLine("                            O drone pegou um objeto.                            ");
+                Console.WriteLine("                            O que fazer?............                            ");
+                Console.WriteLine("                            1 - Armazenar...........                            ");
+                Console.WriteLine("                            2 - Rotacionar Pulso....                            ");
+                Console.WriteLine("                            3 - Manter..............                            ");
+                Console.WriteLine("                            4 - Soltar..............                            ");
+                Console.WriteLine("--------------------------------------------------------------------------------");
                 value = short.Parse(Console.ReadLine());
             }
             catch (Exception erro) {
@@ -441,6 +448,7 @@ namespace Drone {
                 case 1: Console.WriteLine("Objeto armazenado com sucesso"); drone.Take++; break;
                 case 2: Rotate(drone); break;
                 case 3: drone.Status = "Ocupado"; break;
+                case 4: drone.Status = "Em atividade"; break;
                 default: Console.WriteLine("Valor Inválido"); break;
             }
             Thread.Sleep(1000);
@@ -456,12 +464,14 @@ namespace Drone {
                 Console.Clear();
                 try
                 {
-                    Console.WriteLine("Esse é o menu de rotação do pulso.");
-                    Console.WriteLine($"O pulso do drone virou {drone.Rotate}°");
-                    Console.WriteLine("1 - Direita");
-                    Console.WriteLine("2 - Esquerda");
-                    Console.WriteLine("3 - Escrever Valor");
-                    Console.WriteLine("0 - Cancelar");
+                    Console.WriteLine("--------------------------------------------------------------------------");
+                    Console.WriteLine("                    Esse é o menu de rotação do pulso.                    ");
+                    Console.WriteLine($"                    O pulso do drone virou {drone.Rotate}°                    ");
+                    Console.WriteLine("                    1 - Direita.......................                    ");
+                    Console.WriteLine("                    2 - Esquerda......................                    ");
+                    Console.WriteLine("                    3 - Escrever Valor................                    ");
+                    Console.WriteLine("                    0 - Cancelar......................                    ");
+                    Console.WriteLine("--------------------------------------------------------------------------");
                     direction = short.Parse(Console.ReadLine());
                     
                 }
@@ -504,7 +514,49 @@ namespace Drone {
         }
     
         static void Knock (Drone drone) {
-            
+            Console.Clear();
+            Console.WriteLine("----------------------------------------------------------------------------------");
+            Console.WriteLine("                         O drone bateu e quebrou o objeto                         ");
+            Console.WriteLine("                         Deseja coletar?.................                         ");
+            Console.WriteLine("                         s - Sim.........................                         ");
+            Console.WriteLine("                         n - Não.........................                         ");
+            Console.WriteLine("----------------------------------------------------------------------------------");
+            string value = Console.ReadLine();
+
+            switch(value) {
+                case "s": Collect(drone); break;
+
+                case "n": Menu(drone); break;
+            }
+
         }
-    }
+
+        static void Cut (Drone drone) {
+            Console.Clear();
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("                        O drone usou uma tesoura e cortou o objeto                        ");
+            Console.WriteLine("                        Deseja coletar?...........................                        ");
+            Console.WriteLine("                        s - Sim...................................                        ");
+            Console.WriteLine("                        n - Não...................................                        ");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            string value = Console.ReadLine();
+
+            switch(value) {
+                case "s": Collect(drone); break;
+
+                case "n": Menu(drone); break;
+            }
+        }
+
+        static void Collect (Drone drone) {
+            Console.Clear();
+
+            Console.WriteLine("Objeto coletado com sucesso");
+            drone.Take++;
+            Thread.Sleep(1000);
+
+            Menu(drone);
+
+        }
+     }
 }
